@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 exports.register = async (req, res) => {
   const { username, email, firstName, lastName, password } = req.body;
@@ -45,7 +46,6 @@ exports.register = async (req, res) => {
   }
 };
 
-
 exports.loginUser = async (req, res) => {
   const { username, password } = req.body;
 
@@ -57,7 +57,7 @@ exports.loginUser = async (req, res) => {
   }
 
   try {
-    const getUser = await User.findOne({email: email});
+    const getUser = await User.findOne({ username: username });
 
     if (!getUser) {
       return res.status(404).json({
@@ -66,7 +66,7 @@ exports.loginUser = async (req, res) => {
       });
     }
 
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = await bcrypt.compare(password, getUser.password);
 
     if (!isPasswordValid) {
       return res.status(401).json({
@@ -75,16 +75,21 @@ exports.loginUser = async (req, res) => {
       });
     }
 
-    res.status(200).json({
+    const payload = {
+      _id: getUser._id,
+      email: getUser.email,
+      username: getUser.username,
+    };
+
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
+
+    return res.status(200).json({
       success: true,
       message: "Login successful",
-      user: {
-        id: user._id,
-        username: user.username,
-        email: user.email,
-        firstName: user.firstName,
-        lastName: user.lastName,
-      },
+      data: getUser,
+      token: token,
     });
   } catch (error) {
     console.error("Error in loginUser controller:", error);
@@ -93,4 +98,4 @@ exports.loginUser = async (req, res) => {
       message: "Internal server error",
     });
   }
-}
+};
