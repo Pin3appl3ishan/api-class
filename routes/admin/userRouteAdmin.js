@@ -9,8 +9,11 @@ const {
   deleteUser,
 } = require("../../controllers/admin/usermanagement");
 
+const { authorizedUser } = require("../../middlewares/authorizedUser");
+const { isAdmin } = require("../../middlewares/authorizedUser");
+
 router.post("/", createUser);
-router.get("/", getAllUsers);
+router.get("/", authorizedUser, isAdmin, getAllUsers);
 router.get("/:id", getOne);
 router.put("/:id", updateUser);
 router.delete("/:id", deleteUser);
