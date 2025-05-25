@@ -1,14 +1,19 @@
+require("dotenv").config(); // load environment variables from .env file
+
 const express = require("express");
+
 const connectDB = require("./config/db");
 const userRoutes = require("./routes/userRoutes");
+const userRoutesAdmin = require("./routes/admin/userRouteAdmin");
 
 const app = express();
 
 app.use(express.json()); // middleware to parse json
 // data from request body
-//
 connectDB(); // connect to database
+
 app.use("/api/auth", userRoutes); // use user routes
+app.use("/api/admin/users", userRoutesAdmin); // use admin routes
 
 app.get("/", (req, res, next) => {
   // logic
@@ -121,7 +126,8 @@ app.delete("/blogs/:blogId", (req, res) => {
 });
 
 app.listen(
-  3000, // port -> localhost:3000
+  // port -> localhost:3000
+  3000,
   () => {
     console.log("Server is running on port 3000");
   }
