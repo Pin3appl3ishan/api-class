@@ -5,6 +5,8 @@ const express = require("express");
 const connectDB = require("./config/db");
 const userRoutes = require("./routes/userRoutes");
 const userRoutesAdmin = require("./routes/admin/userRouteAdmin");
+const adminCategoryRoutes = require("./routes/categoryRoutes");
+const adminProductRoutes = require("./routes/admin/productRouteAdmin");
 
 const app = express();
 
@@ -14,6 +16,7 @@ connectDB(); // connect to database
 
 app.use("/api/auth", userRoutes); // use user routes
 app.use("/api/admin/users", userRoutesAdmin); // use admin routes
+app.use("api/admin/category", adminCategoryRoutes); // use admin category routes
 
 app.get("/", (req, res, next) => {
   // logic
