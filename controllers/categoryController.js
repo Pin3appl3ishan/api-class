@@ -1,22 +1,13 @@
 const Category = require("../models/Category");
 
-exports.create = async (req, res) => {
+exports.createCategory = async (req, res) => {
   try {
-    const category = new Category({
-      categoryName: req.body.categoryName,
-    });
-    await category.save();
-    return res.status(201).json({
-      success: true,
-      message: "Category created successfully",
-      category: category,
-    });
-  } catch (error) {
-    console.error("Error in create controller:", error);
-    return res.status(500).json({
-      success: false,
-      message: "Internal server error",
-    });
+    const { categoryName } = req.body;
+    const category = new Category({ categoryName });
+    const savedCategory = await category.save();
+    res.status(201).json(savedCategory);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 };
 
