@@ -8,10 +8,14 @@ const userRoutesAdmin = require("./routes/admin/userRouteAdmin");
 const categoryRoutes = require("./routes/categoryRoutes");
 const adminProductRoutes = require("./routes/admin/productRouteAdmin");
 
+const path = require("path"); // for file path handling
+
 const app = express();
 
 app.use(express.json()); // middleware to parse json
 // data from request body
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads"))); // serve static files from uploads directory
 connectDB(); // connect to database
 
 app.use("/api/auth", userRoutes); // use user routes

@@ -10,8 +10,6 @@ exports.createProduct = async (req, res) => {
       sellerId,
     } = req.body;
 
-    console.log(req.body);
-
     const newProduct = new Product({
       productName,
       productPrice,
@@ -19,6 +17,8 @@ exports.createProduct = async (req, res) => {
       categoryId,
       sellerId,
     });
+
+    const filename = req.file ? req.file.path : null;
 
     await newProduct.save();
 

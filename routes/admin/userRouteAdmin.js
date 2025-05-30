@@ -12,7 +12,9 @@ const {
 const { authorizedUser } = require("../../middlewares/authorizedUser");
 const { isAdmin } = require("../../middlewares/authorizedUser");
 
-router.post("/", createUser);
+const upload = require('../../middlewares/fileupload');
+
+router.post("/", upload.single("image"), createUser);
 router.get("/", authorizedUser, isAdmin, getAllUsers);
 router.get("/:id", getOne);
 router.put("/:id", updateUser);
