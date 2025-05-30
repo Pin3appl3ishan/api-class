@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const ProductSchema = new mongoose.Schema({
   productName: {
     type: String,
@@ -14,16 +14,21 @@ const ProductSchema = new mongoose.Schema({
   },
   categoryId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Category',
+    ref: "Category",
     required: true,
   },
   sellerId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
+    required: true,
+  },
+  productImage: {
+    type: String,
     required: true,
   },
 });
 
-const Product = mongoose.models.Product || mongoose.model('Product', ProductSchema);
+const Product =
+  mongoose.models.Product || mongoose.model("Product", ProductSchema);
 
 module.exports = Product;
