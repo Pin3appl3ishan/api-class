@@ -1,4 +1,3 @@
-import React, { use } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 
@@ -37,6 +36,7 @@ export const LoginTest = () => {
       {name}
       {email}
       {password}
+      {message}
       <button>submit</button>
       <input onChange={(e)=>setName(e.target.value)}></input>
         <input onChange={(e)=>setEmail(e.target.value)}></input>

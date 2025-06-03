@@ -5,6 +5,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import MainLayout from "../layouts/MainLayout"; // Make sure you have this
 import StateManage from "../pages/StateManage";
+import { LoginTest } from "../pages/LoginTest";
 
 const AppRoutes = () => {
   return (
