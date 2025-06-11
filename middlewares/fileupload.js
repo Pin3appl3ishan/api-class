@@ -23,6 +23,6 @@ const upload = multer({
 
 module.exports = {
   single: (fieldName) => upload.single(fieldName),
-  array: (fieldName, maxCount) => upload.array(fieldname, maxCount),
+  array: (fieldName, maxCount) => upload.array(fieldName, maxCount),
   fields: (fieldsArray) => upload.fields(fieldsArray),
 };

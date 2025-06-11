@@ -8,27 +8,20 @@ const ProductSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  productDescription: {
-    type: String,
-    required: true,
-  },
   categoryId: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.ObjectId,
     ref: "Category",
     required: true,
   },
   sellerId: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.ObjectId,
     ref: "User",
     required: true,
   },
   productImage: {
     type: String,
-    required: true,
   },
 });
 
-const Product =
+module.exports =
   mongoose.models.Product || mongoose.model("Product", ProductSchema);
-
-module.exports = Product;

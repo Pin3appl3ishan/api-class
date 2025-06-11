@@ -8,7 +8,6 @@ const UserSchema = new mongoose.Schema(
       unique: true,
     },
     email: {
-      
       type: String,
       required: true,
       unique: true,
@@ -25,6 +24,10 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    role: {
+      type: String,
+      default: "normal"
+    }
   },
   {
     timestamps: true,

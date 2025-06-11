@@ -1,17 +1,22 @@
 require("dotenv").config(); // load environment variables from .env file
 
 const express = require("express");
+const cors = require("cors"); // for cross-origin resource sharing
 
 const connectDB = require("./config/db");
 const userRoutes = require("./routes/userRoutes");
 const userRoutesAdmin = require("./routes/admin/userRouteAdmin");
-const categoryRoutes = require("./routes/categoryRoutes");
+const categoryRoutes = require("./routes/admin/categoryRouteAdmin");
 const adminProductRoutes = require("./routes/admin/productRouteAdmin");
 
 const path = require("path"); // for file path handling
 
 const app = express();
 
+let corsOptions ={
+  origin:"*"  // or list of domain to whitelist
+}
+app.use(cors(corsOptions))
 app.use(express.json()); // middleware to parse json
 // data from request body
 

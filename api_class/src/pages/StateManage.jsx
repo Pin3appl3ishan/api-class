@@ -15,7 +15,7 @@ const StateManage = () => {
   );
   useEffect(
     () => {
-      if (data == "Aray") {
+      if (data == "Arya") {
         setData(1000);
       }
     },

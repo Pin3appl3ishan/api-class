@@ -4,12 +4,11 @@ const CategorySchema = new mongoose.Schema({
   categoryName: {
     type: String,
     required: true,
+    unique: true,
   },
   filepath: {
     type: String,
-    required: true,
-  }
+  },
 });
 
-const Category = mongoose.model("Category", CategorySchema);
-module.exports = Category;
+module.exports = mongoose.model("Category", CategorySchema);
