@@ -7,6 +7,11 @@ import MainLayout from "../layouts/MainLayout"; // Make sure you have this
 import StateManage from "../pages/StateManage";
 import { LoginTest } from "../pages/LoginTest";
 import { GuestRoute } from "./Guestroute";
+import ViewCategory from "../pages/admin/ViewCategory";
+import UpdateCategory from "../pages/admin/UpdateCategory";
+import CategoryManagement from "../pages/admin/CategoryManagement";
+import AdminLayout from "../layouts/AdminLayout";
+import { ProductManagement } from "../pages/admin/ProductManagement";
 
 const AppRoutes = () => {
   return (
@@ -16,7 +21,7 @@ const AppRoutes = () => {
         <Route path="/login-test" element={<LoginTest />}></Route>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Homepage />} />
-          <Route element={<GuestRoute />} />  
+          <Route element={<GuestRoute />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
         </Route>
@@ -24,7 +29,8 @@ const AppRoutes = () => {
         <Route path="/normal/*">
           <Route path="order" element={<>My Order</>}></Route>
           <Route path="cart" element={<>My Cart</>}></Route>
-          <Route path="*" element={<>404 Not Found</>}></Route> // if path is beside above mentoined like - normal/random
+          <Route path="*" element={<>404 Not Found</>}></Route>
+          {/* // if path is beside above mentoined like - normal/random */}
         </Route>
 
         {/* Make a Route Protection for admin
@@ -38,12 +44,20 @@ const AppRoutes = () => {
           apply the route production in these routes
         */}
 
-        <Route path="/admin/*">
-          <Route path="dashboard" element={<>My Dashboard</>}></Route>
-          <Route path="users" element={<>My Order</>}></Route>
-          <Route path="categores" element={<>My Cart</>}></Route>
-          <Route path="products" element={<>My Cart</>}></Route>
-          <Route path="*" element={<>404 Not Found</>}></Route>
+        <Route element={<AdminLayout />}>
+          <Route path="/admin/*">
+            <Route path="category" element={<CategoryManagement />}></Route>
+            <Route path="products" element={<ProductManagement />}></Route>
+
+            {/* <Route path="category" element={< />}></Route> */}
+            <Route path="category/:id" element={<ViewCategory />}></Route>
+            <Route
+              path="category/:id/edit"
+              element={<UpdateCategory />}
+            ></Route>
+            {/* <Route path="category/create" element={< />}></Route> */}
+            <Route path="*" element={<>404 Not Found</>}></Route>
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
